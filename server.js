@@ -7,7 +7,7 @@ const numbers = []
 function retrive(id){
     // Retrive number by id
     const number = numbers.find(c=> c.id === id);
-    return number;
+    return number.number;
 }
 
 function generate(){
@@ -34,7 +34,7 @@ res.send(numbers);
 });
  
 app.get('/api/numbers/:id', (req, res) => {
-const number = retrive(parseInt(req.params.id));
+const number = retrive(parseInt(req.params.id).toString());
  
 if (!number) res.status(404).send('<h2 style="font-family: Malgun Gothic; color: darkred;">Ooops... Cant find what you are looking for!</h2>');
 res.send(number);
@@ -51,7 +51,7 @@ res.send(gen);
 //DELETE Request Handler
 app.delete('/api/numbers/:id', (req, res) => {
  
-const number = retrive(parseInt(req.params.id));
+const number = numbers.find( c=> c.id === parseInt(req.params.id).toString());
 if(!number) res.status(404).send('<h2 style="font-family: Malgun Gothic; color: darkred;"> Not Found!! </h2>');
  
 const index = numbers.indexOf(number);
